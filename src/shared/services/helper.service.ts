@@ -17,4 +17,19 @@ export class HelperService {
 
     return time;
   }
+
+  /**
+   * This is the moveScrollToElement function
+   * @param elemId string
+   * @returns void
+   */
+  moveScrollToElement(elemId: string): void {
+    setTimeout(() => {
+      let elementToScroll = document.getElementById(elemId);
+      if (elementToScroll) {
+        elementToScroll.scrollIntoView();
+      }
+    }, 0);
+  }
+  
 }

@@ -6,6 +6,7 @@ import { map, without } from 'lodash';
 import { Subscription } from 'rxjs';
 import { LoginLoaderService } from 'src/shared/services/login-loader.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HelperService } from 'src/shared/services/helper.service';
 
 @Component({
   selector: 'city-forecast',
@@ -23,7 +24,8 @@ export class CityForecastComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private dataService: WeatherDataService,
-    private loader: LoginLoaderService
+    private loader: LoginLoaderService,
+    private helper: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -59,7 +61,9 @@ export class CityForecastComponent implements OnInit, OnDestroy {
         });
 
         // Remove undefines from the array
-        this.foreCastData = without(finalData, undefined)
+        this.foreCastData = without(finalData, undefined);
+
+        this.helper.moveScrollToElement('ForecastInDays');
       },
         (error: HttpErrorResponse) => {
           this.loader.hide();
